@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>利润平分</title>
+    <style>
+      html,body,div,h1,h2,h3,ul,li,img,table,tr,td {
+        padding: 0;
+        margin: 0;
+      }
+      html,body{
+        height: 100%;
+      }
+      #app {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        姓名:<input type="text" id="xingmingA" value="A"><br>
+        姓名:<input type="text" id="xingmingB" value="B"><br>
+        <span id="xmA1">A</span>收入: <input type="number" id="shouA" value=""><br>
+        <span id="xmA2">A</span>支出: <input type="number" id="zhichuA" value=""><br>
+        <span id="xmB1">B</span>收入: <input type="number" id="shouB" value=""><br>
+        <span id="xmB2">B</span>支出: <input type="number" id="zhichuB" value="">
+        <br><br>
+        <button id="jisuan">计算</button>
+        <button id="chongzhi">重置</button>
+      </div>
+      <div>
+        <p id="result"></p>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('xingmingA').addEventListener('input', function() {
+        const xingmingA = document.getElementById('xingmingA').value
+        document.getElementById('xmA1').innerText = xingmingA
+        document.getElementById('xmA2').innerText = xingmingA
+      })
+      document.getElementById('xingmingB').addEventListener('input', function() {
+        const xingmingB = document.getElementById('xingmingB').value
+        document.getElementById('xmB1').innerText = xingmingB
+        document.getElementById('xmB2').innerText = xingmingB
+      })
+
+      document.getElementById('jisuan').addEventListener('click', function() {
+        const shouA = Number(document.getElementById('shouA').value) 
+        const zhichuA = Number(document.getElementById('zhichuA').value) 
+        const shouB = Number(document.getElementById('shouB').value)
+        const zhichuB = Number(document.getElementById('zhichuB').value)
+        
+        const zongshourun = shouA + shouB
+        const zongzhichu = zhichuA + zhichuB
+
+        const zonglirun = zongshourun - zongzhichu
+        const pingfenlirun = zonglirun / 2
+
+        const Alirun = shouA - zhichuA
+        const Blirun = shouB - zhichuB
+        const zhifu = Alirun - pingfenlirun
+
+        const A = document.getElementById('xingmingA').value
+        const B = document.getElementById('xingmingB').value
+
+        var str = `${A}收入:${shouA}
+                  ${A}支出:${zhichuA}
+                  ${A}利润:${Alirun}
+
+                  ${B}收入:${shouB}
+                  ${B}支出:${zhichuB} 
+                  ${B}利润:${Blirun}
+
+                  总收入:${zongshourun} 总支出:${zongzhichu}   
+                  总利润:${zonglirun}  平分利润:${pingfenlirun}
+
+                  ${A}支付给${B}:${zhifu}`
+
+        document.getElementById('result').innerText = str
+
+      })
+
+      document.getElementById('chongzhi').addEventListener('click', function() {
+        document.getElementById('shouA').value = ''
+        document.getElementById('zhichuA').value = ''
+        document.getElementById('shouB').value = ''
+        document.getElementById('zhichuB').value = ''
+        document.getElementById('result').innerText = ''
+      })
+    </script>
+  </body>
+</html>
